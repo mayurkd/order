@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orderexample.entity.OrderEntity;
+import com.orderexample.itementity.ItemEntity;
+import com.orderexample.itemrepo.Itemrepo;
 import com.orderexample.repo.EntityRepo;
 
 
@@ -21,7 +23,13 @@ import com.orderexample.repo.EntityRepo;
 public class OrderController {
 	@Autowired
 	EntityRepo entityrepo;
-	
+	@Autowired
+	Itemrepo itemrepo;
+	@GetMapping(value = "/item")
+	public List<ItemEntity> getitemdetails()
+	{
+		return itemrepo.findAll();
+	}
 	@GetMapping(value = "/order")
 	public List<OrderEntity> getorder(){
 		return entityrepo.findAll();
@@ -31,12 +39,22 @@ public class OrderController {
 			 return entityrepo.findById(id);
 		//return entityrepo.findAll().get(id);
 	}
+	@GetMapping(value ="/item/{id}")
+	public Optional<ItemEntity> getitemid(@PathVariable("id")int id){
+		return itemrepo.findById(id);
+	}
 	
 	@PostMapping(value = "/neworder")
 	public String createnew(@RequestBody OrderEntity orderentity)
 	{
 		entityrepo.save(orderentity);
-		return "New item Created Successfully";
+		return "New order Created Successfully";
+	}
+	@PostMapping(value="/newitem")
+	public String createitem(@RequestBody ItemEntity item)
+	{
+		itemrepo.save(item);
+		return "new item create";
 	}
 	@PutMapping(value = "/updateorder")
 	public String updateorder(@RequestBody OrderEntity orderentity)
@@ -44,10 +62,22 @@ public class OrderController {
 		entityrepo.save(orderentity);
 		return "Order Updated Successfully";
 	}
-	@DeleteMapping(value = "/delete/{id}")
-	public void delete(@PathVariable("id")int id)
+	@PutMapping(value = "/updateitem")
+	public String updateorder(@RequestBody ItemEntity item)
+	{
+		itemrepo.save(item);
+		return "item Updated Successfully";
+	}
+	@DeleteMapping(value = "/deleteorder/{id}")
+	public void deleteOrder(@PathVariable("id")int id)
 	{
 		entityrepo.deleteById(id);
+		
+	}
+	@DeleteMapping(value = "/deleteitem/{id}")
+	public void deleteItem(@PathVariable("id")int id)
+	{
+		itemrepo.deleteById(id);
 		
 	}
 	
