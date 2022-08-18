@@ -12,31 +12,55 @@ import lombok.*;
 @Table(name = "Orderdetail")
 public class OrderEntity {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "orderid")
 	private int orderid;
 	@Column(name = "itemname")
 	private String itemname;
 	@Column(name = "itemnumber")
 	private long itemid;
-	/*public int getOrderid() {
-		return orderid;
-	}*/
+	@Column(name = "custumer_name")
+	private String custumer_name;
+	@Column(name = "Address")
+	private String Address;
+
+	public String getCustumer_name() {
+		return custumer_name;
+	}
+
+	public void setCustumer_name(String custumer_name) {
+		this.custumer_name = custumer_name;
+	}
+
+	public String getAddress() {
+		return Address;
+	}
+
+	public void setAddress(String address) {
+		Address = address;
+	}
+
+	/*
+	 * public int getOrderid() { return orderid; }
+	 */
 	public void setOrderid(int orderid) {
 		this.orderid = orderid;
 	}
+
 	public String getItemname() {
 		return itemname;
 	}
+
 	public void setItemname(String itemname) {
 		this.itemname = itemname;
 	}
+
 	public long getItemid() {
 		return itemid;
 	}
+
 	public void setItemid(long itemid) {
 		this.itemid = itemid;
 	}
-	
-	
+
 }
