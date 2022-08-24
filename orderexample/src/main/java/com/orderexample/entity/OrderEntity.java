@@ -22,9 +22,9 @@ public class OrderEntity {
 	private long itemid;
 	@Column(name = "name")
 	private String name;
-	/*public int getOrderid() {
+	public int getOrderid() {
 		return orderid;
-	}*/
+	}
 	public void setOrderid(int orderid) {
 		this.orderid = orderid;
 	}

@@ -4,7 +4,6 @@ package com.orderexample.controller;
 import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -90,7 +89,14 @@ public class OrderController {
 	{
 		return entityrepo.findByName(name);
 	}
-	
+	@GetMapping(value = "/orderitem/{id}")
+	public Optional<OrderEntity> orderItem(@PathVariable ("id") int id){
+		return entityrepo.findById(id);
+	}
+	@GetMapping(value = "/orderitemname/{name}")
+	public List<OrderEntity> orderItem(@PathVariable ("name") String name){
+		return entityrepo.findByName(name);
+	}
 	@GetMapping(value = "/check")
 	public String check()
 	{
